@@ -2,6 +2,11 @@
 
 Debug pathways: DCV 1V range, adjust resolution etc, STATUS => CONFIG => +-
 
+## Current status
+
+- [SN 35239](sn35239_log.md): WIP, bad current board, intsource characterisation fail
+- [SN 43268](sn43268_log.md): WIP, vref mismatch
+
 ## Other repair logs/resources
 
 - <https://xdevs.com/fix/d1281/>
@@ -32,11 +37,45 @@ Debug pathways: DCV 1V range, adjust resolution etc, STATUS => CONFIG => +-
 | Digital | -14_2 unreg | TP504          | TP503             |
 | Digital | 2.5         | TP201          | TP503             |
 
-## Revision differences
+[Digital testpoints](photos/testpoints_digital.png), [DC testpoints](photos/testpoints_dc.png)
 
-Compared to information available
+## Revision differences (SN 35239 and up)
+
+- Plastic fasteners appear to be in decent condition, latches can be reused
+- Binding posts are fixed and not retractable
+
+### DC assy v3.4
+
+- No major botches on the bottom of the board.
+- No components attached to legs of electrolytics.
+- Capacitor values are different to what's in service manual:
+
+  | Designator       | Value per manual | Value as found |
+  | :--------------- | :--------------- | :------------- |
+  | C307,308,312,313 | 100uF @ 25V      | 100uF @ 50V    |
+  | C901,904,905     | 1000uF @ 40V     | 1000uF @ 50V   |
+  | C807             | 470uF @ 25V      | no change      |
+  | C907,910         | 33uF @ 63V       | *220uF* @ 63V  |
+  | C909,912,913,914 | 1uF @ 63V        | 1uF @ 100V     |
+
+  All capacitors were United ChemiCon KME
+
+### Digital assy v1.12
+
+- Capacitor values are different to what's in service manual:
+
+  | Designator | Value per manual | Value as found |
+  | :--------- | :--------------- | :------------- |
+  | C501       | 1000uF @ 40V     | 1000uF @ 50V   |
+  | C502       | 470uF @ 63V      | no change      |
+  | C510       | 220uF @ 40V      | 220uF @ 50V    |
+  | C513,514   | 2200uF @ 16V     | 2200uF @ 25V   |
+  | C515       | 470uF @ 25V      | no change      |
+  | C520       | 330uF @ 100V     | 220uF @ 100V   |
 
 ## Misc
+
+- `-35V` in-guard PSU appears to not be used. It only goes to the Current board, where it never leaves the header.
 
 **Outdated** Both meters seem to be severely off on 100mV range (measured at 7dg fast):
 
