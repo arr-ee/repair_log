@@ -20,6 +20,8 @@ Debug pathways: DCV 1V range, adjust resolution etc, STATUS => CONFIG => +-
   - Good info on replacement fixtures
 - <https://www.eevblog.com/forum/repair/datron-1271-repair/>
   - earlier thread by `rigrunner` on 1271
+- [Service manual, rev.1 (Jul 1989)](https://xdevs.com/doc/Datron/1281/Datron%201281%20Service%20Manual%20%281989-01%29%20complete.pdf)
+- [User manual, rev.6 (Feb 1999)](https://xdevs.com/doc/Datron/1281/DatronWavetek_1281_Service_Manual-userguide_v6-11999-02.pdf)
 
 ## Voltage checks
 
