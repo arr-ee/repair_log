@@ -1,0 +1,345 @@
+{
+  "locations": {
+    "outguard_psu": {
+      "name": "Outguard PSU"
+    },
+    "inguard_psu": {
+      "name": "Inguard PSU"
+    },
+    "mobo": {
+      "name": "Motherboard"
+    }
+  },
+  "rails": {
+    "AC": {
+      "name": "AC in"
+    },
+    "EARTH": {
+      "name": "GND (PE)",
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j20 p9" },
+        { "target": "shields", "via": "mobo j10" },
+        { "target": "front", "via": "mobo j1 p96" }
+      ]
+    },
+    "com_dig": {
+      "name": "0V (digital)",
+      "location": "outguard_psu",
+      "derived_from": "EARTH",
+      "testpoints": { "outguard_psu": ["TP2"], "front": ["TP7"] },
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j20 p4" },
+        { "target": "front", "via": "mobo j1 p46,47,49" },
+        { "target": "digital", "via": "mobo j2 p46-49" },
+        { "target": "a_iface", "via": "mobo j3 p46-49" },
+        { "target": "refdiv", "via": "mobo j4 p113" }
+      ]
+    },
+    "pos_8v_unreg": {
+      "name": "+8V unregulated (digital)",
+      "location": "outguard_psu",
+      "derived_from": "AC",
+      "referenced_to": "com_dig",
+      "testpoints": { "outguard_psu": ["TP1"], "front": ["TP2"] },
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j20 p2" },
+        { "target": "front", "via": "mobo j1 p42,43" },
+        { "target": "digital", "via": "mobo j2 p42,43" },
+        { "target": "a_iface", "via": "mobo j3 p44" }
+      ]
+    },
+    "pos_5v_outguard": {
+      "name": "+5V (digital)",
+      "location": "outguard_psu",
+      "derived_from": "pos_8v_unreg",
+      "referenced_to": "com_dig",
+      "testpoints": { "outguard_psu": ["TP7"], "front": ["TP3"] },
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j20 p7" },
+        { "target": "front", "via": "mobo j1 p50-53" },
+        { "target": "digital", "via": "mobo j2 p50-53" },
+        { "target": "a_iface", "via": "mobo j3 p50-53" },
+        { "target": "refdiv", "via": "mobo j4 p114" }
+      ]
+    },
+    "pos_5v_led": {
+      "name": "+5V (LEDs)",
+      "location": "outguard_psu",
+      "derived_from": "pos_5v_outguard",
+      "referenced_to": "com_dig",
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j20 p1" },
+        { "target": "front", "via": "mobo j1 p48" }
+      ]
+    },
+    "neg_175v": {
+      "name": "-175V (display)",
+      "location": "outguard_psu",
+      "derived_from": "AC",
+      "referenced_to": "pos_5v_led",
+      "testpoints": { "outguard_psu": ["TP3"] },
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j20 p8" },
+        { "target": "front", "via": "mobo j1 p94" }
+      ]
+    },
+    "com_analog_2": {
+      "name": "0V(2)",
+      "location": "inguard_psu",
+      "derived_from": "AC",
+      "testpoints": { "inguard_psu": ["TP7"], "dc_pcb": ["TP15"] },
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j25 p5" },
+        { "target": "shields", "via": "mobo j11,12,13,14,15" },
+        { "target": "refdiv", "via": "mobo j4 p65,66" },
+        { "target": "dc", "via": "mobo j5 p72,76,114" },
+        { "target": "sine_source", "via": "mobo j6 p81,84,86,89" },
+        { "target": "ac", "via": "mobo j7 p81,84,86,89" },
+        { "target": "curr_ohms", "via": "mobo j8 p48,82,86,89" },
+        { "target": "poweramp", "via": "mobo j9 p81,85,97-102,105-109" }
+      ]
+    },
+    "pos_15v_analog": {
+      "name": "+15V(2)",
+      "location": "inguard_psu",
+      "derived_from": "AC",
+      "referenced_to": "com_analog_2",
+      "testpoints": { "inguard_psu": ["TP9"], "dc_pcb": ["TP2"] },
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j25 p3" },
+        { "target": "refdiv", "via": "mobo j4 p63" },
+        { "target": "dc", "via": "mobo j5 p77" },
+        { "target": "sine_source", "via": "mobo j6 p87" },
+        { "target": "ac", "via": "mobo j7 p87" },
+        { "target": "curr_ohms", "via": "mobo j8 p87" },
+        { "target": "poweramp", "via": "mobo j9 p95" }
+      ]
+    },
+    "neg_15v_analog": {
+      "name": "-15V(2)",
+      "location": "inguard_psu",
+      "derived_from": "AC",
+      "referenced_to": "com_analog_2",
+      "testpoints": { "inguard_psu": ["TP8"], "dc_pcb": ["TP3"] },
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j25 p4" },
+        { "target": "refdiv", "via": "mobo j4 p64" },
+        { "target": "dc", "via": "mobo j5 p78" },
+        { "target": "sine_source", "via": "mobo j6 p88" },
+        { "target": "ac", "via": "mobo j7 p88" },
+        { "target": "curr_ohms", "via": "mobo j8 p88" },
+        { "target": "poweramp", "via": "mobo j9 p96" }
+      ]
+    },
+    "pos_8v_analog": {
+      "name": "+8V(2)",
+      "location": "inguard_psu",
+      "derived_from": "pos_15v_analog",
+      "referenced_to": "com_analog_2",
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j25 p1" },
+        { "target": "sine_source", "via": "mobo j6 p82" },
+        { "target": "ac", "via": "mobo j7 p82" },
+        { "target": "poweramp", "via": "mobo j9 p92" }
+      ],
+      "notes": "Not used on 4000?"
+    },
+    "neg_8v_analog": {
+      "name": "-8V(2)",
+      "location": "inguard_psu",
+      "derived_from": "neg_15v_analog",
+      "referenced_to": "com_analog_2",
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j25 p2" },
+        { "target": "sine_source", "via": "mobo j6 p83" },
+        { "target": "ac", "via": "mobo j7 p83" },
+        { "target": "poweramp", "via": "mobo j9 p93" }
+      ],
+      "notes": "Not used on 4000?"
+    },
+    "neg_10v_analog": {
+      "name": "-10V(2)",
+      "location": "inguard_psu",
+      "derived_from": "neg_15v_analog",
+      "referenced_to": "com_analog_2",
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j25 p6" },
+        { "target": "refdiv", "via": "mobo j4 p67" }
+      ]
+    },
+    "com_analog_curr": {
+      "name": "0V(22, current)",
+      "location": "inguard_psu",
+      "derived_from": "com_analog_2",
+      "testpoints": ["TP3"],
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j25 p7" },
+        { "target": "curr_ohms", "via": "mobo j8 p92,93" }
+      ]
+    },
+    "pos_22v_curr": {
+      "name": "+22V(2)",
+      "location": "inguard_psu",
+      "derived_from": "AC",
+      "referenced_to": "com_analog_curr",
+      "testpoints": ["TP2"]
+    },
+    "neg_22v_curr": {
+      "name": "-22V(2)",
+      "location": "inguard_psu",
+      "derived_from": "AC",
+      "referenced_to": "com_analog_curr",
+      "testpoints": ["TP1"]
+    },
+    "com_analog_4": {
+      "name": "0V(4) ref div",
+      "location": "inguard_psu",
+      "derived_from": "AC",
+      "testpoints": {
+        "inguard_psu": ["TP5"],
+        "refdiv": ["TP15"]
+      },
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j21 p5" },
+        { "target": "refdiv", "via": "mobo j4 p8,12,14,16" },
+        { "target": "dc", "via": "mobo j5 p4,8" }
+      ]
+    },
+    "pos_36v_refdiv": {
+      "name": "+36V(4)",
+      "location": "inguard_psu",
+      "derived_from": "AC",
+      "referenced_to": "com_analog_4",
+      "testpoints": ["TP6"],
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j21 p3" },
+        { "target": "refdiv", "via": "mobo j4 p6" }
+      ]
+    },
+    "pos_18v_refdiv": {
+      "name": "+18V(4)",
+      "location": "inguard_psu",
+      "derived_from": "pos_36v_refdiv",
+      "referenced_to": "com_analog_4",
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j21 p2" },
+        { "target": "refdiv", "via": "mobo j4 p5" }
+      ]
+    },
+    "pos_15v_refdiv": {
+      "name": "+15V(4)",
+      "location": "refdiv",
+      "derived_from": "pos_18v_refdiv",
+      "referenced_to": "com_analog_4",
+      "testpoints": { "refdiv": ["TP9"] }
+    },
+    "neg_15v_refdiv": {
+      "name": "-15V(4)",
+      "location": "inguard_psu",
+      "derived_from": "AC",
+      "referenced_to": "com_analog_4",
+      "testpoints": {
+        "inguard_psu": ["TP4"],
+        "refdiv": ["TP7"]
+      },
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j21 p4" },
+        { "target": "refdiv", "via": "mobo j4 p7" }
+      ]
+    },
+    "vref": {
+      "name": "Vref / +20.3~20.9V",
+      "location": "refdiv",
+      "derived_from": "pos_36v_refdiv",
+      "referenced_to": "com_analog_4",
+      "testpoints": {
+        "refdiv": ["TP13"]
+      }
+    },
+    "pos_9v_refdiv": {
+      "name": "+9V(1,2)",
+      "location": "refdiv",
+      "derived_from": "vref",
+      "referenced_to": "neg_15v_refdiv",
+      "testpoints": {
+        "refdiv": ["TP14"]
+      }
+    },
+    "com_analog_3": {
+      "name": "0V(3)",
+      "location": "inguard_psu",
+      "derived_from": "AC",
+      "testpoints": { "inguard_psu": ["TP11"], "dc_pcb": ["TP10"] },
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j22 p3" },
+        { "target": "dc", "via": "mobo j5 p48" }
+      ]
+    },
+    "pos_8v_analog_3": {
+      "name": "+8V(3)",
+      "location": "inguard_psu",
+      "derived_from": "AC",
+      "referenced_to": "com_analog_3",
+      "testpoints": { "inguard_psu": ["TP12"], "dc_pcb": ["TP11"] },
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j22 p1" },
+        { "target": "dc", "via": "mobo j5 p46" }
+      ]
+    },
+    "neg_8v_analog_3": {
+      "name": "-8V(3)",
+      "location": "inguard_psu",
+      "derived_from": "AC",
+      "referenced_to": "com_analog_3",
+      "testpoints": { "inguard_psu": ["TP10"], "dc_pcb": ["TP7"] },
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j22 p2" },
+        { "target": "dc", "via": "mobo j5 p47" }
+      ]
+    },
+    "com_poweramp_2": {
+      "name": "0V(poweramp)",
+      "location": "poweramp",
+      "derived_from": "com_analog_2",
+      "testpoints": ["TP27"],
+      "notes": "Star point for most 0V(2) grounds on the board"
+    },
+    "pos_50v_analog": {
+      "name": "+50V",
+      "location": "poweramp",
+      "derived_from": "AC",
+      "referenced_to": "com_poweramp_2",
+      "testpoints": ["TLF"]
+    },
+    "neg_50v_analog": {
+      "name": "-50V",
+      "location": "poweramp",
+      "derived_from": "AC",
+      "referenced_to": "com_poweramp_2",
+      "testpoints": ["TLG"]
+    },
+    "pos_35v_analog": {
+      "name": "+35V(2)",
+      "location": "poweramp",
+      "derived_from": "pos_50v_analog",
+      "referenced_to": "com_analog_2",
+      "testpoints": { "poweramp": [], "dc_pcb": ["TP13"] },
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j9 p115" },
+        { "target": "dc", "via": "mobo j5 p112" }
+      ],
+      "notes": "Somehow uses 10V buffer in & out? 10V buffer out == common? DC board 10V bootstrap"
+    },
+    "neg_35v_analog": {
+      "name": "-35V(2)",
+      "location": "poweramp",
+      "derived_from": "neg_50v_analog",
+      "referenced_to": "com_analog_2",
+      "testpoints": { "poweramp": [], "dc_pcb": ["TP14"] },
+      "connected_to": [
+        { "target": "mobo", "via": "mobo j9 p116" },
+        { "target": "dc", "via": "mobo j5 p113" }
+      ]
+    }
+  }
+}
